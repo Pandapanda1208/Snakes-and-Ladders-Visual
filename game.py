@@ -23,7 +23,7 @@ class Player(pygame.sprite.Sprite):
         self.name = name
         self.pos = pos
 
-        radius = 2
+        radius = 25
         
         diameter = radius * 2
         self.image = pygame.Surface((diameter, diameter), pygame.SRCALPHA)
@@ -33,7 +33,6 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=(x, y))
 
 
-pygame.init()
 
 players = int(input("How many people are playing? (1-4) "))
 
@@ -41,13 +40,33 @@ while players < 1 or players > 4:
     print('It needs to be between 1 and four players.')
     players = int(input("How many people are playing? (1-4) "))
 
-all_sprites = pygame.sprite.Group()
+
+if players == 1:
+    p1 = input("What is your Player1's name? ")
+elif players == 2:
+    p1 = input("What is your Player1's name? ")
+    p2 = input("What is your Player2's name? ")
+elif players == 3:
+    p1 = input("What is your Player1's name? ")
+    p2 = input("What is your Player2's name? ")
+    p3 = input("What is your Player3's name? ")
+elif players == 4:
+    p1 = input("What is your Player1's name? ")
+    p2 = input("What is your Player2's name? ")
+    p3 = input("What is your Player3's name? ")
+    p4 = input("What is your Player4's name? ")
+
+
+
+pygame.init()
+
+
+all_players = pygame.sprite.Group()
 colors = [(255, 0, 255), (255, 255, 0), (0, 255, 0), (0, 0, 255)]
 
 for i in range(players):
-    globals()[f'player{i + 1}'] = Player(colors[i], 0, 0, input("What is your name? "), 0)
-
-all_sprites.add() 
+    globals()[f'player{i + 1}'] = Player(colors[i], 800, 500, f'p{i + 1}', 0)
+    all_players.add(globals()[f'player{i + 1}']) 
 
 
 
@@ -64,6 +83,7 @@ while run:
 
     screen.blit(board.image, board.rect)
 
+    all_players.draw(screen)
 
     pygame.display.flip()
 
