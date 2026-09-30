@@ -77,6 +77,11 @@ screen = pygame.display.set_mode(logical_size, flags)
 board = Image(static_dir / "Board.png", 0, 0, 768, 768)
 
 
+
+places = [(0, (0, 800)), (1, (800, 0)), (2, (800, 500))]
+
+globals()['player1'].pos = 1
+
 run = True
 while run:
     screen.fill((0, 0, 0))
@@ -86,6 +91,13 @@ while run:
     all_players.draw(screen)
 
     pygame.display.flip()
+
+
+    for i in range(players):
+        globals()[f'player{i + 1}'].rect.centerx = places[globals()[f'player{i + 1}'].pos][1][0]
+        globals()[f'player{i + 1}'].rect.centery = places[globals()[f'player{i + 1}'].pos][1][1]
+
+
 
 
     key = pygame.key.get_pressed()
