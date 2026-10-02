@@ -102,11 +102,9 @@ while run:
     key = pygame.key.get_pressed()
     if key[pygame.K_ESCAPE] == True:
         run = False
-
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             run = False
-        if event.type == pygame.MOUSEBUTTONDOWN():
+        if event.type == pygame.MOUSEBUTTONDOWN:
             for i in range(players):
                 globals()[f'player{i + 1}'].pos += 1
